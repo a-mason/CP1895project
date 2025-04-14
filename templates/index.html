@@ -3,4 +3,14 @@
 {% block body %}
         <h2>Welcome!</h2>
         <p>This is the start of Flask Web Application</p>
+
+        <ul>
+        {% for item in collection_of_something %}
+                <div>{{ item.name }}</div>
+                <div>{{ item.info }}</div>
+                <img height="150" src="{{ file_location }}/{{ item.image }}" alt="{{ item.name }}">
+        {% endfor %}
+        </ul>
+
+<a href="{{ url_for('add') }}">Add new item</a>
 {% endblock %}

@@ -38,6 +38,7 @@ def add():
                 filename = os.path.join(file_save_location, unique_name)
                 uploaded_file.save(filename)
                 session["characters"].append({
+                    "characterid": uuid.uuid4().hex,
                     "name": name,
                     "info": info,
                     "image": unique_name,
@@ -60,6 +61,43 @@ def battle():
                            characters=session["characters"],
                            file_location=file_save_location,
                            boss_hp=session["boss_hp"])
+
+@app.route("/remove/<characterid>", methods=["POST"])
+def remove(characterid):
+    for character in session["characters"]:
+        if character["characterid"] == characterid:
+            session["characters"].remove(character)
+            session.modified = True
+            flash("Character removed", "message")
+            break
+
+    return redirect("/")
+
+@app.route("/attack/<characterid>", methods=["POST"])
+def attack(characterid):
+    if "characters" not in session:
+        flash("No characters available.", "error")
+        return redirect("/battle")
+
+    for character in session["characters"]:
+        if character["characterid"] == characterid:
+            attacker = character
+            break
+
+    if attacker["hp"] <= 0:
+        flash(f"{attacker['name']} has fainted!", "error")
+        return redirect("/battle")
+
+    damage = random.randint(1, 5)
+    session["boss_hp"] = max(session.get("boss_hp", 100) - damage, 0)
+    flash(f"{attacker['name']} dealt {damage} damage to the boss!", "message")
+
+    counter_damage = random.randint(1, 5)
+    attacker["hp"] = max(attacker["hp"] - counter_damage, 0)
+    flash(f"The boss counterattacked for {counter_damage} damage to {attacker['name']}!", "error")
+
+    session.modified = True
+    return redirect("/battle")
 
 if __name__ == "__main__":
     app.run(debug=True)

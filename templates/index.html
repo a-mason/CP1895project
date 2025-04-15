@@ -4,14 +4,21 @@
         <h2>Welcome!</h2>
         <p>This is the start of Flask Web Application</p>
 
-        <ul>
-        {% for character in characters %}
-                <div>{{ character.name }}</div>
-                <div>{{ character.info }}</div>
-                <img height="150" src="{{ file_location }}/{{ character.image }}" alt="{{ character.name }}">
-        {% endfor %}
-        </ul>
+        {% if characters %}
+        <h3>Your Current Characters</h3>
+            <ul>
+              {% for character in characters %}
+                <li>
+                  <b>{{ character.name }}</b> ({{ character.info }})<br>
+                  <img src="{{ file_location }}/{{ character.image }}" height="100">
 
+                  <form action="{{ url_for('remove', characterid=character.characterid) }}" method="post">
+                    <button type="submit">Remove</button>
+                  </form>
+                </li>
+              {% endfor %}
+            </ul>
+        {% endif %}
         <a href="{{ url_for('add') }}">Add Character</a>
         <br>
         <a href="{{ url_for('battle') }}">Battle!</a>

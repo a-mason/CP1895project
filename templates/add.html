@@ -1,20 +1,20 @@
 {% extends "layout.html" %}
 
 {% block body %}
-        <h2>Upload to Collection</h2>
-        <form action="/add" method="post" enctype="multipart/form-data">
-          <div>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name">
-          </div>
-          <div>
-            <label for="info">Info</label>
-            <input type="text"  id="info" name="info">
-          </div>
-          <div>
-            <input type="file" name="file">
-          </div>
-          <button type="submit">Upload</button>
-        </form>
-        <script src="/static/validate.js"></script>
+    <h2>Create a Character</h2>
+    <form action="/add" method="post" enctype="multipart/form-data">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name">
+      </div>
+      <div>
+        <label for="info">Info</label>
+        <input type="text"  id="info" name="info">
+      </div>
+      <div>
+        <input type="file" name="file">
+      </div>
+      <button type="submit">Upload</button>
+    </form>
+    <script src="/static/validate.js"></script>
 {% endblock %}

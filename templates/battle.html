@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h2>Boss Battle</h2>
+  <p>Boss HP: {{ boss_hp }}</p>
+
+  <ul>
+    {% for character in characters %}
+      <li>
+        <div>{{ character.name }} ({{ character.hp }} HP)</div>
+        <img src="{{ file_location }}/{{ character.image }}" height="100">
+        <a href="">Attack</a>
+      </li>
+    {% endfor %}
+  </ul>
+  <a href="{{ url_for('index') }}">Retreat!</a>
+{% endblock %}

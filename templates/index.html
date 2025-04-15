@@ -5,12 +5,14 @@
         <p>This is the start of Flask Web Application</p>
 
         <ul>
-        {% for item in collection_of_something %}
-                <div>{{ item.name }}</div>
-                <div>{{ item.info }}</div>
-                <img height="150" src="{{ file_location }}/{{ item.image }}" alt="{{ item.name }}">
+        {% for character in characters %}
+                <div>{{ character.name }}</div>
+                <div>{{ character.info }}</div>
+                <img height="150" src="{{ file_location }}/{{ character.image }}" alt="{{ character.name }}">
         {% endfor %}
         </ul>
 
-<a href="{{ url_for('add') }}">Add new item</a>
+        <a href="{{ url_for('add') }}">Add Character</a>
+        <br>
+        <a href="{{ url_for('battle') }}">Battle!</a>
 {% endblock %}

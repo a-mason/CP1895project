@@ -1,25 +1,27 @@
 {% extends "layout.html" %}
 
 {% block body %}
-        <h2>Welcome!</h2>
-        <p>This is the start of Flask Web Application</p>
-
+    <div class="mx-auto text-center">
         {% if characters %}
         <h3>Your Current Characters</h3>
-            <ul>
+            <div class="d-flex flex-wrap justify-content-center gap-4">
               {% for character in characters %}
-                <li>
-                  <b>{{ character.name }}</b> ({{ character.info }})<br>
-                  <img src="{{ file_location }}/{{ character.image }}" height="100">
-
+                <div class="card p-2" style="width: 150px">
+                  <b>{{ character.name }}</b> ({{ character.info }})<br>({{ character.hp }} / 10 HP)<br>
+                  <img src="{{ file_location }}/{{ character.image }}" class="{% if character.hp <= 0 %}fainted{% endif %}
+                   rounded mx-auto d-block" height="100" alt="Character Image">
                   <form action="{{ url_for('remove', characterid=character.characterid) }}" method="post">
                     <button type="submit">Remove</button>
                   </form>
-                </li>
+                </div>
               {% endfor %}
-            </ul>
+            </div>
         {% endif %}
+
         <a href="{{ url_for('add') }}">Add Character</a>
         <br>
-        <a href="{{ url_for('battle') }}">Battle!</a>
+    </div>
+    <div class="fixed-bottom text-center mt-4 mb-5">
+      <a class="btn btn-outline-secondary" href="{{ url_for('battle') }}">Battle!</a>
+    </div>
 {% endblock %}

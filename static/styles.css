@@ -1,3 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+  font-family: 'Press Start 2P', cursive !important;
+}
+
+.bosshp {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 24px;
+}
+
 .fainted {
   filter: grayscale(100%);
+}
+
+.faintedtext {
+  font-family: 'Press Start 2P';
+  font-size: 14px;
+  margin-left: 6px;
+  color: red;
 }

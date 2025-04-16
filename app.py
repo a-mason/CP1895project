@@ -28,9 +28,9 @@ def add():
 
         name = request.form.get("name", "invalid")
         info = request.form.get("info", "invalid")
-        uploaded_file = request.files['file']
+        uploaded_file = request.files["file"]
 
-        if uploaded_file.filename != '':
+        if uploaded_file.filename != "":
             extension = os.path.splitext(uploaded_file.filename)[1].lower()
 
             if extension in allowed_types:
@@ -76,7 +76,7 @@ def remove(characterid):
 @app.route("/attack/<characterid>", methods=["POST"])
 def attack(characterid):
     if "characters" not in session:
-        flash("No characters available.", "error")
+        flash("No characters available", "error")
         return redirect("/battle")
 
     for character in session["characters"]:
@@ -84,17 +84,18 @@ def attack(characterid):
             attacker = character
             break
 
-    if attacker["hp"] <= 0:
-        flash(f"{attacker['name']} has fainted!", "error")
-        return redirect("/battle")
-
     damage = random.randint(1, 5)
     session["boss_hp"] = max(session.get("boss_hp", 100) - damage, 0)
-    flash(f"{attacker['name']} dealt {damage} damage to the boss!", "message")
+    flash(f"{attacker["name"]} dealt {damage} damage to the boss!", "attack")
 
     counter_damage = random.randint(1, 5)
     attacker["hp"] = max(attacker["hp"] - counter_damage, 0)
-    flash(f"The boss counterattacked for {counter_damage} damage to {attacker['name']}!", "error")
+    flash(f"The boss counterattacked for {counter_damage} damage to {attacker["name"]}!", "counter")
+
+
+    if attacker["hp"] <= 0:
+        flash(f"{attacker["name"]} has fainted!", "fainted")
+        return redirect("/battle")
 
     session.modified = True
     return redirect("/battle")

@@ -1,21 +1,22 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<div class="d-flex flex-wrap justify-content-center">
-    <h2>Create a Character</h2>
-    <br>
-    <form action="/add" method="post" enctype="multipart/form-data">
-      <div>
+<div class="d-flex justify-content-center">
+<h2>Create a Character</h2>
+</div>
+<p>
+    <form action="/add" method="post" enctype="multipart/form-data" class="d-flex justify-content-center gap-3">
+      <p class="d-inline-block text-center>
         <label for="name">Name</label>
         <input type="text" id="name" name="name">
-      </div>
-      <div>
+      </p>
+      <p class="d-inline-block text-center>
         <label for="info">Info</label>
         <input type="text"  id="info" name="info">
-      </div>
-      <div>
+      </p>
+      <p class="d-inline-block text-center>
         <input type="file" name="file">
-      </div>
+      </p>
       <button type="submit">Upload</button>
     </form>
 </div>

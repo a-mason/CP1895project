@@ -2,16 +2,37 @@
 
 {% block body %}
     <div class="mx-auto text-center">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <div class="chat-bubble text-start p-3 rounded bg-light shadow-sm">
+                {% if boss_hp == 100 %}
+                    <div>Thank goodness you're here DEV!<br>We're stuck in an infinite loop and need your help defeating the boss!
+                    <br>It's dangerous to go alone! Take some characters with you!</div>
+                {% elif boss_hp >= 50 %}
+                    <div>Keep going, you can save us!</div>
+                {% elif boss_hp >= 25 %}
+                    <div>You've almost defeated the boss, keep going!</div>
+                {% elif boss_hp == 0 %}
+                    <div>You did it DEV!<br>You've broken us out of the loop, thank you!<br>
+                    <form action="{{ url_for('reset') }}" method="post">
+                        <button class="btn btn-outline-secondary" type="submit">RESET</button>
+                    </form>
+                {% endif %}
+                <img src="static/requiredimages/npc.png" alt="NPC Guide" height="100" class="me-3">
+            </div>
+        </div>
+    </div>
+
+    <div class="mx-auto text-center">
         {% if characters %}
         <h3>Your Current Characters</h3>
             <div class="d-flex flex-wrap justify-content-center gap-4">
               {% for character in characters %}
-                <div class="card p-2" style="width: 150px">
+                <div class="card p-2" style="width: 100px, height: 100px;">
                   <b>{{ character.name }}</b> ({{ character.info }})<br>({{ character.hp }} / 10 HP)<br>
                   <img src="{{ file_location }}/{{ character.image }}" class="{% if character.hp <= 0 %}fainted{% endif %}
                    rounded mx-auto d-block" height="100" alt="Character Image">
                   <form action="{{ url_for('remove', characterid=character.characterid) }}" method="post">
-                    <button type="submit">Remove</button>
+                    <button class="btn btn-outline-secondary" type="submit">Remove</button>
                   </form>
                 </div>
               {% endfor %}

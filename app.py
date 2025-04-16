@@ -14,7 +14,9 @@ allowed_types = [".png", ".jpg", ".jpeg"]
 def index():
     if "characters" not in session:
         session["characters"] = []
-    return render_template("index.html", characters=session["characters"], file_location=file_save_location)
+    if "boss_hp" not in session:
+        session["boss_hp"] = 100
+    return render_template("index.html", characters=session["characters"], boss_hp=session["boss_hp"], file_location=file_save_location)
 
 @app.route("/add", methods=["GET", "POST"])
 def add():
@@ -99,6 +101,12 @@ def attack(characterid):
 
     session.modified = True
     return redirect("/battle")
+
+@app.route("/reset", methods=["POST"])
+def reset():
+    session.clear()
+    return redirect("/")
+
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body {
-  font-family: 'Press Start 2P', cursive !important;
+  font-family: 'Press Start 2P', monospace !important;
 }
 
 .bosshp {
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Press Start 2P', monospace;
   font-size: 24px;
 }
 

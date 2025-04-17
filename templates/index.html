@@ -33,7 +33,7 @@
             <div class="d-flex flex-wrap justify-content-center gap-4">
               {% for character in characters %}
                 <div class="card p-2" style="width: 100px, height: 100px;">
-                  {{ character.name }} ({{ character.info }})<br>({{ character.hp }} / 10 HP)<br>
+                  {{ character.name }}<br>({{ character.hp }} / 10 HP)<br>
                   <img src="{{ file_location }}/{{ character.image }}" class="{% if character.hp <= 0 %}fainted{% endif %}
                    rounded mx-auto d-block" height="100" alt="Character Image">
                   <form action="{{ url_for('remove', characterid=character.characterid) }}" method="post">

@@ -29,7 +29,6 @@ def add():
             session["characters"] = []
 
         name = request.form.get("name", "invalid")
-        info = request.form.get("info", "invalid")
         uploaded_file = request.files["file"]
 
         if uploaded_file.filename != "":
@@ -42,7 +41,6 @@ def add():
                 session["characters"].append({
                     "characterid": uuid.uuid4().hex,
                     "name": name,
-                    "info": info,
                     "image": unique_name,
                     "hp": 10})
                 session.modified = True

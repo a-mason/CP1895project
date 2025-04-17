@@ -10,6 +10,7 @@ Session(app)
 
 file_save_location = "static/images"
 allowed_types = [".png", ".jpg", ".jpeg"]
+os.makedirs(file_save_location, exist_ok=True)
 @app.route("/")
 def index():
     if "characters" not in session:

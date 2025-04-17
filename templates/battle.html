@@ -40,7 +40,7 @@
   <div class="fixed-bottom d-flex flex-wrap justify-content-center mb-5 py-2 px-2">
     {% for character in characters %}
         <div class="text-center mx-3">
-            {{ character.name }}<br>({{ character.hp }} / 10 HP)<br>
+            {{ character.name }}<br>({{ character.hp }} / 20 HP)<br>
             <img src="{{ file_location }}/{{ character.image }}" class="{% if character.hp <= 0 %}fainted{% endif %}" height="150">
          {% if character.hp > 0 and boss_hp > 0 %}
             <form action="{{ url_for('attack', characterid=character.characterid) }}" method="post">
@@ -53,7 +53,13 @@
     {% endfor %}
   </div>
  </div>
+{% if boss_hp > 0 %}
     <div class="fixed-bottom text-center mb-2">
       <a class="btn btn-warning" href="{{ url_for('index') }}">Retreat!</a>
     </div>
+{% else %}
+        <div class="fixed-bottom text-center mb-2">
+      <a class="btn btn-success" href="{{ url_for('index') }}">Victory!</a>
+    </div>
+{% endif %}
 {% endblock %}

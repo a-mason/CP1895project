@@ -6,6 +6,7 @@ app = Flask(__name__)
 app.secret_key = "adam_project"
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
+app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
 Session(app)
 
 file_save_location = "static/images"
@@ -43,12 +44,13 @@ def add():
                     "characterid": uuid.uuid4().hex,
                     "name": name,
                     "image": unique_name,
-                    "hp": 10})
+                    "hp": 20})
                 session.modified = True
                 flash("Added to collection", "message")
                 return redirect("/")
             else:
-                flash("Invalid file type, only .png, .jpg, .jpeg files allowed.", "error")
+                flash("Invalid file type", "error")
+                flash("Only .png, .jpg, .jpeg files allowed.", "error")
                 return redirect("/add")
 
 @app.route("/battle")

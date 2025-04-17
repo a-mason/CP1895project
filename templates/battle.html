@@ -1,18 +1,19 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<div class="cavebackground">
     <div class="d-flex justify-content-center">
         {% if boss_hp > 0 %}
-            <p class="d-inline-block text-center mt-2 border border-dark py-2 px-3">
+            <p class="d-inline-block text-center mt-2 py-2 px-5">
             <span>while True:</span>
          {% else %}
-            <p class="d-inline-block text-center mt-2 border border-white py-2 px-3">
+            <p class="d-inline-block text-center mt-2 py-2 px-5">
             <span>while False:</span>
         {% endif %}
         </p>
     </div>
 
-    <div class="d-flex flex-wrap justify-content-center gap-4 mt-2">
+    <div class="d-flex flex-wrap justify-content-center gap-4 mt-3">
       <div class="col-auto text-center">
       <h2>Boss Battle</h2>
       <p class="bosshp"><b>({{ boss_hp }} / 100 HP)</b></p>
@@ -28,20 +29,22 @@
                 {{ message }}
             <p>{% elif category == "counter" %}</p>
                 {{ message }}
+            <p>{% elif category == "fainted" %}</p>
+                {{ message }}
               {% endif %}
             {% endfor %}
           {% endif %}
         {% endwith %}
     </div>
 
-  <div class="fixed-bottom d-flex flex-wrap justify-content-center mb-5">
+  <div class="fixed-bottom d-flex flex-wrap justify-content-center mb-5 py-2 px-2">
     {% for character in characters %}
         <div class="text-center mx-3">
-            <b>{{ character.name }}</b><br>({{ character.hp }} / 10 HP)<br>
+            {{ character.name }}<br>({{ character.hp }} / 10 HP)<br>
             <img src="{{ file_location }}/{{ character.image }}" class="{% if character.hp <= 0 %}fainted{% endif %}" height="150">
          {% if character.hp > 0 and boss_hp > 0 %}
             <form action="{{ url_for('attack', characterid=character.characterid) }}" method="post">
-            <button class="btn btn-outline-secondary" type="submit">Attack</button>
+            <button class="btn btn-danger" type="submit">Attack</button>
             </form>
         {% elif character.hp <= 0 %}
             <p class="faintedtext">Fainted!</p>
@@ -49,8 +52,8 @@
         </div>
     {% endfor %}
   </div>
+ </div>
     <div class="fixed-bottom text-center mb-2">
-      <a class="btn btn-outline-secondary" href="{{ url_for('index') }}">Retreat!</a>
+      <a class="btn btn-warning" href="{{ url_for('index') }}">Retreat!</a>
     </div>
-
 {% endblock %}

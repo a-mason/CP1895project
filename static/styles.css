@@ -1,21 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body {
-  font-family: 'Press Start 2P', monospace !important;
+    font-family: 'Press Start 2P', monospace !important;
 }
 
 .bosshp {
-  font-family: 'Press Start 2P', monospace;
-  font-size: 24px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 24px;
 }
 
 .fainted {
-  filter: grayscale(100%);
+    filter: grayscale(100%);
 }
 
 .faintedtext {
-  font-family: 'Press Start 2P';
-  font-size: 14px;
-  margin-left: 6px;
-  color: red;
+    font-family: 'Press Start 2P';
+    font-size: 14px;
+    margin-left: 6px;
+    color: red;
+}
+
+.cavebackground {
+    background-image: url("/static/requiredimages/cave.png");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    z-index: 1;
+    color: white;
+    text-shadow: 2px 2px 0 #000;
 }

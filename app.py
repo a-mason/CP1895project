@@ -89,7 +89,7 @@ def attack(characterid):
 
     damage = random.randint(1, 5)
     session["boss_hp"] = max(session.get("boss_hp", 100) - damage, 0)
-    flash(f"{attacker["name"]} dealt {damage} damage to the boss!", "attack")
+    flash(f"{attacker['name']} dealt {damage} damage to the boss!", "attack")
 
     counter_damage = random.randint(1, 5)
     attacker["hp"] = max(attacker["hp"] - counter_damage, 0)
